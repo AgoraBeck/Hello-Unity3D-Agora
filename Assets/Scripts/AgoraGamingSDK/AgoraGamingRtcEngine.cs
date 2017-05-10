@@ -1142,7 +1142,7 @@ namespace agora_gaming_rtc
 
 		public override int StopAudioRecording ()
 		{
-			string parameters = doFormat ("{{\"che.audio.stop_recording\":\"{0}\"}}");
+			string parameters = doFormat ("{{\"che.audio.stop_recording\":true}}");
 			return AgoraRtcEngineForGaming_setParameters (parameters);
 		}
 
