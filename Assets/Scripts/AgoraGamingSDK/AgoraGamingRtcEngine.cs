@@ -295,9 +295,10 @@ namespace agora_gaming_rtc
 		 * Set the role of user: such as broadcaster, audience
 		 *
 		 * @param role the role of client
+		 * @param permissionKey the permission key to apply the role
 		 * @return return 0 if success or an error code
 		 */
-		public abstract int SetClientRole(CLIENT_ROLE role);
+		public abstract int SetClientRole(CLIENT_ROLE role, string permissionKey);
 
 		/**
 		 * set the log information filter level
@@ -337,7 +338,7 @@ namespace agora_gaming_rtc
 		 */
 		public abstract int JoinChannel (string channelName, string info, uint uid);
 
-		public abstract int JoinChannelWithKey (string channelKey, string channelName, string info, uint uid);
+		public abstract int JoinChannelByKey (string channelKey, string channelName, string info, uint uid);
 
 		public abstract int RenewChannelKey (string channelKey);
 
@@ -728,7 +729,7 @@ namespace agora_gaming_rtc
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int AgoraRtcEngineForGaming_joinChannel([MarshalAs(UnmanagedType.LPArray)] string channelName, [MarshalAs(UnmanagedType.LPArray)] string info, uint uid);
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int AgoraRtcEngineForGaming_joinChannelWithKey([MarshalAs(UnmanagedType.LPArray)] string channelKey, [MarshalAs(UnmanagedType.LPArray)] string channelName, [MarshalAs(UnmanagedType.LPArray)] string info, uint uid);
+		private static extern int AgoraRtcEngineForGaming_joinChannelByKey([MarshalAs(UnmanagedType.LPArray)] string channelKey, [MarshalAs(UnmanagedType.LPArray)] string channelName, [MarshalAs(UnmanagedType.LPArray)] string info, uint uid);
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int AgoraRtcEngineForGaming_renewChannelKey([MarshalAs(UnmanagedType.LPArray)] string channelKey);
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -754,7 +755,7 @@ namespace agora_gaming_rtc
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int AgoraRtcEngineForGaming_setChannelProfile(int profile);
 		[DllImport(MyLibName, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int AgoraRtcEngineForGaming_setClientRole(int role);
+		private static extern int AgoraRtcEngineForGaming_setClientRole(int role, [MarshalAs(UnmanagedType.LPArray)] string permissionKey);
 		#endregion
 
 		private readonly IAgoraGamingRtcPlugin plugin;
@@ -810,9 +811,9 @@ namespace agora_gaming_rtc
 			return AgoraRtcEngineForGaming_joinChannel(channelName, info, uid);
 		}
 
-		public override int JoinChannelWithKey (string channelKey, string channelName, string info, uint uid)
+		public override int JoinChannelByKey (string channelKey, string channelName, string info, uint uid)
 		{
-			return AgoraRtcEngineForGaming_joinChannelWithKey(channelKey, channelName, info, uid);
+			return AgoraRtcEngineForGaming_joinChannelByKey(channelKey, channelName, info, uid);
 		}
 
 		public override int RenewChannelKey (string channelKey)
@@ -1032,9 +1033,9 @@ namespace agora_gaming_rtc
 			return AgoraRtcEngineForGaming_setChannelProfile ((int)profile);
 		}
 
-		public override int SetClientRole (CLIENT_ROLE role)
+		public override int SetClientRole (CLIENT_ROLE role, string permissionKey)
 		{
-			return AgoraRtcEngineForGaming_setClientRole ((int)role);
+			return AgoraRtcEngineForGaming_setClientRole ((int)role, permissionKey);
 		}
 
 		public override int EnableAudioVolumeIndication(int interval, int smooth)

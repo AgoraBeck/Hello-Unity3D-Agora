@@ -140,7 +140,7 @@ public class HelloUnity3D : MonoBehaviour
 		}
 
 		mRtcEngine.JoinChannel (channelName, "extra", 0);
-		// mRtcEngine.JoinChannelWithKey ("YOUR_CHANNEL_KEY", channelName, "extra", 9527);
+		// mRtcEngine.JoinChannelByKey ("YOUR_CHANNEL_KEY", channelName, "extra", 9527);
 	}
 
 	public void LeaveChannel ()
