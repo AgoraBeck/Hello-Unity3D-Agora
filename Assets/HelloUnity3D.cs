@@ -20,6 +20,11 @@ public class HelloUnity3D : MonoBehaviour
 	// After you entered the App ID, remove ## outside of Your App ID
 	private static string appId = #YOUR APP ID#;
 
+	void Awake ()
+	{
+		Application.targetFrameRate = 30;
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
