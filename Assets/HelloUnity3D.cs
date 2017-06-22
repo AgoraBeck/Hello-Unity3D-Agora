@@ -22,6 +22,7 @@ public class HelloUnity3D : MonoBehaviour
 
 	void Awake ()
 	{
+		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 	}
 
