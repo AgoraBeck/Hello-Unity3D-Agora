@@ -37,7 +37,7 @@ Finally, Open project with Unity and run.
 ## Connect Us
 
 - You can find full API document at [Document Center](https://docs.agora.io/en/)
-- You can fire bugs about this demo at [issue](https://github.com/AgoraIO/Hello-Unity3D-Agora/issues)
+- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Hello-Unity3D-Agora/issues)
 
 ## License
 
