@@ -11,7 +11,7 @@ public class HelloUnity3D : MonoBehaviour
 	public InputField mChannelNameInputField;
 	public Text mShownMessage;
 
-	private static IRtcEngineForGaming mRtcEngine = null;
+	private static IRtcEngine mRtcEngine = null;
 
 	private static bool mInitialized = false;
 
@@ -32,10 +32,10 @@ public class HelloUnity3D : MonoBehaviour
 		if (!mInitialized) {
 			mInitialized = true;
 
-			mRtcEngine = IRtcEngineForGaming.GetEngine (appId);
+			mRtcEngine = IRtcEngine.GetEngine (appId);
 
 			mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) => {
-				string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngineForGaming.GetSdkVersion ());
+				string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngine.GetSdkVersion ());
 				Debug.Log (joinSuccessMessage);
 				mShownMessage.GetComponent<Text> ().text = (joinSuccessMessage);
 			};
@@ -73,13 +73,13 @@ public class HelloUnity3D : MonoBehaviour
 			};
 
 			mRtcEngine.OnWarning += (int warn, string msg) => {
-				string description = IRtcEngineForGaming.GetErrorDescription(warn);
+				string description = IRtcEngine.GetErrorDescription(warn);
 				string warningMessage = string.Format ("onWarning callback {0} {1} {2}", warn, msg, description);
 				Debug.Log (warningMessage);
 			};
 
 			mRtcEngine.OnError += (int error, string msg) => {
-				string description = IRtcEngineForGaming.GetErrorDescription(error);
+				string description = IRtcEngine.GetErrorDescription(error);
 				string errorMessage = string.Format ("onError callback {0} {1} {2}", error, msg, description);
 				Debug.Log (errorMessage);
 			};
