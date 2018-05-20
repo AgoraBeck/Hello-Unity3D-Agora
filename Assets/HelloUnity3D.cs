@@ -101,7 +101,7 @@ public class HelloUnity3D : MonoBehaviour
 				Debug.Log (routeMessage);
 			};
 
-			mRtcEngine.OnRequestChannelKey += () => {
+			mRtcEngine.OnRequestToken += () => {
 				string requestKeyMessage = string.Format ("OnRequestChannelKey");
 				Debug.Log (requestKeyMessage);
 			};
