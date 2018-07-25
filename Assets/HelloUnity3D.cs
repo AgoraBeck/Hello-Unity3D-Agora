@@ -10,15 +10,15 @@ public class HelloUnity3D : MonoBehaviour
 {
 	public InputField mChannelNameInputField;
 	public Text mShownMessage;
-
-	private static IRtcEngine mRtcEngine = null;
-
-	private static bool mInitialized = false;
+	public Text versionText;
+	public Button joinChannel;
+	public Button leaveChannel;
+	private IRtcEngine mRtcEngine = null;
 
 	// PLEASE KEEP THIS App ID IN SAFE PLACE
 	// Get your own App ID at https://dashboard.agora.io/
 	// After you entered the App ID, remove ## outside of Your App ID
-	private static string appId = #YOUR APP ID#;
+	private string appId = #YOUR APP ID#;
 
 	void Awake ()
 	{
@@ -29,11 +29,13 @@ public class HelloUnity3D : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		if (!mInitialized) {
-			mInitialized = true;
+			joinChannel.onClick.AddListener (JoinChannel);	
+			leaveChannel.onClick.AddListener (LeaveChannel);
 
 			mRtcEngine = IRtcEngine.GetEngine (appId);
+			versionText.GetComponent<Text> ().text ="Version : " + IRtcEngine.GetSdkVersion ();
 
+			Debug.Log ("zzzzz  version  =   " + IRtcEngine.GetSdkVersion ());
 			mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) => {
 				string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngine.GetSdkVersion ());
 				Debug.Log (joinSuccessMessage);
@@ -124,7 +126,6 @@ public class HelloUnity3D : MonoBehaviour
 
 			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
 			// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
-		}
 	}
 
 	// Update is called once per frame
